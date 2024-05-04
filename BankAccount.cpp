@@ -2,9 +2,7 @@
 #include <iostream> 
 
 //creates a balance of $2000
-BankAccount::BankAccount(){
-    balance = 2000; 
-}
+BankAccount::BankAccount(){}
 
 // adds an amount to bank balance
 void BankAccount::deposit(double amount){
