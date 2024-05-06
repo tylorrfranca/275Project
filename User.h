@@ -8,25 +8,16 @@ Version: 1.0.0
 #ifndef USER_H
 #define USER_H
 
-#include "BankAccount.h"
+#include "CheckingAccount.h"
+#include "SavingsAccount.h"
+#include "CreditCard.h"
+
 #include <iostream> 
 
 class User {
     public:
+          User(std::string i, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc);
 
-    /**
-         Constructs an employee with a id, given name, salary, and
-        bank account.
-        @param i the id
-        @param n the name
-        @param s the annual salary
-        @param BankAcc a pointer to the bank account
-    */
-          User(std::string i, std::string n, double s, BankAccount* BankAcc);
-    /**
-         Deposits one month's salary into the bank account.
-    */
-          void deposit_monthly_salary();
 
 
     /**
@@ -35,11 +26,28 @@ class User {
 
           void print(std::ostream &outputFile) const;
 
+      // transfers funds from savings account to checkings account
+          void transerSavingsToCheckings(double amount);
+
+
+      //transfers funds from savings account to credit card account
+          void transerSavingsToCreditCard(double amount);
+
+
+      //transfers funds from checkings account to savings account
+          void transerCheckingToSavings(double amount);
+
+
+      //transfers funds from checkings account to credit card account
+          void transerCheckingToCreditCard(double amount);
+
     private:
           std::string id;
           std::string name;
           double salary;
-          BankAccount* account;
+          CheckingAccount* CkAccount;
+          SavingsAccount* SvAccount; 
+          CreditCard* CreditAcc;
 };
 
 

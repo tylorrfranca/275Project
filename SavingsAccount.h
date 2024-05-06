@@ -20,9 +20,13 @@ public:
    SavingsAccount();
 
 
+   void withdraw(double amount) override{};
+
+
 private:
     std::string id;
     double balance;
 };
+
 
 #endif

@@ -1,16 +1,24 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "BankAccount.h"
 
 #ifndef CREDITCARD_H
 #define CREDITCARD_H
 
 using namespace std;
 
-class CreditCard
+class CreditCard : public BankAccount
 {
+  public:
+  CreditCard();
+
+    double getBalance();
+    double getScore();
+    double getAvailableCredit();
+
+
   private:
-    int number[];
     int score;
     int credit; //available credit
     double balance;
@@ -18,8 +26,6 @@ class CreditCard
     //transaction history?
     //struct Transaction?
     // Transaction Transactions[]
-  public:
-    double getBalance();
-    double getScore();
-    double getAvailableCredit();
-}
+};
+
+#endif

@@ -31,7 +31,7 @@ public:
       Withdraws money from this account.
       @param amount the amount to withdraw.
    */
-   void withdraw(double amount);
+   virtual void withdraw(double amount);
 
    /**
       Gets the balance of this account.

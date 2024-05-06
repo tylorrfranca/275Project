@@ -17,7 +17,9 @@ public:
    /**
       Constructs a Savings account with a $0 balance.
    */
-   CheckingAccount::CheckingAccount();
+   CheckingAccount();
+   
+
 
 
 private:

@@ -4,24 +4,20 @@ Author: Tylor Franca
 Version: 1.0.0
 */
 
-#ifndef SAVINGS_ACCOUNT_H
-#define SAVINGS_ACCOUNT_H
 
-#include "BankAccount.h"
+#include "SavingsAccount.h"
 #include <string> 
 #include <fstream>
 #include <iostream>
 
-class SavingsAccount : public BankAccount {
-public:
    /**
       Constructs a Savings account with a $0 balance.
    */
-   SavingsAccount::SavingsAccount(){
+SavingsAccount::SavingsAccount(){
     balance = 1000;
-   }
+}
 
-   void SavingsAccount::withdraw(double amount){
+void SavingsAccount::withdraw(double amount){
     if(amount > balance){
         std::cout << "Not enough Funds\n"; 
     }
@@ -33,10 +29,3 @@ public:
     }
 }
 
-
-private:
-    std::string id;
-    double balance;
-};
-
-#endif

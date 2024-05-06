@@ -6,15 +6,38 @@
 #include <fstream>
 using namespace std; 
 
-User::User(std::string i, std::string n, double s, BankAccount *BankAcc) {
+User::User(std::string i, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc)
+ {
     this->id = i; 
     name = n; 
-    salary = s; 
-    account = BankAcc;
+    CkAccount = CkAcc;
+    SvAccount = SvAcc;
+    CreditAcc = cc; 
 }
 
-void User::deposit_monthly_salary(){
-    account -> deposit(salary/12);
+void User::transerSavingsToCheckings(double amount){
+    SvAccount->withdraw(amount); 
+    CkAccount->deposit(amount);
+}
+
+      //transfers funds from savings account to credit card account
+void User::transerSavingsToCreditCard(double amount){
+    SvAccount->withdraw(amount); 
+    CreditAcc->deposit(amount);
+}
+
+
+      //transfers funds from checkings account to savings account
+void User:: transerCheckingToSavings(double amount){
+    CkAccount->withdraw(amount);
+    SvAccount->deposit(amount);
+}
+
+
+      
+void User:: transerCheckingToCreditCard(double amount){
+    CkAccount->withdraw(amount);
+    CreditAcc->deposit(amount);
 }
 
 void User::print(std::ostream &outputFile) const {
@@ -27,6 +50,6 @@ void User::print(std::ostream &outputFile) const {
         << std::left << "|" << std::setw(14) << fname << "\t"
         << std::left << "|" << std::setw(18) << std::fixed << std::setprecision(2) << salary << "\t"
         << std::left << "|" << std::setw(16) << std::fixed << std::setprecision(2) <<salary/12 << "\t"
-        << std::left << "|" << std::setw(12) << std::fixed << std::setprecision(2) << account->get_balance() <<  " | " <<"\n";
+        << std::left << "|" << std::setw(12) << std::fixed << std::setprecision(2) << CkAccount->get_balance() <<  " | " <<"\n";
     
 }
