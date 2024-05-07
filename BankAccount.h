@@ -18,7 +18,7 @@ public:
    /**
       Constructs a bank account with a $2000 balance.
    */
-   BankAccount();
+   explicit BankAccount();
 
    /**
       Deposits money into this account.
@@ -48,7 +48,7 @@ public:
      Set id for bank account.
   */
     void set_id(std::string id);
-private:
+protected:
     std::string id;
     double balance;
 };

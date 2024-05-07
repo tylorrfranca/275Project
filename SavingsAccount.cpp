@@ -11,10 +11,12 @@ Version: 1.0.0
 #include <iostream>
 
    /**
-      Constructs a Savings account with a $0 balance.
+      Constructs a Savings account with a $1000 balance.
    */
-SavingsAccount::SavingsAccount(){
-    balance = 1000;
+
+  // balance not being initialized correctly, needs fix
+SavingsAccount::SavingsAccount() : balance(1000){
+    balance = 200;
 }
 
 void SavingsAccount::withdraw(double amount){

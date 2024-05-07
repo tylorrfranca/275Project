@@ -16,7 +16,7 @@ Version: 1.0.0
 
 class User {
     public:
-          User(std::string i, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc);
+          User(std::string UserN, std::string UserP, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc);
 
 
 
@@ -41,8 +41,13 @@ class User {
       //transfers funds from checkings account to credit card account
           void transerCheckingToCreditCard(double amount);
 
+          std::string get_UserName() const;
+
+          std::string get_password() const;
+
     private:
-          std::string id;
+          std::string UserName;
+          std::string passWord; 
           std::string name;
           double salary;
           CheckingAccount* CkAccount;

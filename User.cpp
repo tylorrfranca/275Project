@@ -6,9 +6,10 @@
 #include <fstream>
 using namespace std; 
 
-User::User(std::string i, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc)
+User::User(std::string UserN, std::string UserP, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc)
  {
-    this->id = i; 
+    this->UserName = UserN;
+    passWord = UserP; 
     name = n; 
     CkAccount = CkAcc;
     SvAccount = SvAcc;
@@ -35,9 +36,17 @@ void User:: transerCheckingToSavings(double amount){
 
 
       
-void User:: transerCheckingToCreditCard(double amount){
+void User::transerCheckingToCreditCard(double amount){
     CkAccount->withdraw(amount);
     CreditAcc->deposit(amount);
+}
+
+std::string User::get_UserName() const{
+    return UserName;
+}
+
+std::string User::get_password() const{
+    return passWord;
 }
 
 void User::print(std::ostream &outputFile) const {
@@ -45,7 +54,7 @@ void User::print(std::ostream &outputFile) const {
     string fname = name.substr(0, space); // string before a space is the first name
     string lname = name.substr(space + 1); 
 
-    outputFile << left << "|" << std::setw(16)<< id << "\t"
+    outputFile << left << "|" << std::setw(16)<< UserName << "\t"
         << std::left << "|" << std::setw(14) << lname << "\t"
         << std::left << "|" << std::setw(14) << fname << "\t"
         << std::left << "|" << std::setw(18) << std::fixed << std::setprecision(2) << salary << "\t"
