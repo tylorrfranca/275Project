@@ -21,21 +21,33 @@ User::User(std::string UserN, std::string UserP, std::string n, CheckingAccount*
 }
 
 void User::transerSavingsToCheckings(double amount){
-    SvAccount->withdraw(amount); 
-    CkAccount->deposit(amount);
+    if((SvAccount->get_balance()) >= amount){
+        SvAccount->withdraw(amount); 
+        CkAccount->deposit(amount);
+    }else{
+        cout << "Not enough funds\n";
+    }
 }
 
       //transfers funds from savings account to credit card account
 void User::transerSavingsToCreditCard(double amount){
-    SvAccount->withdraw(amount); 
-    CreditAcc->withdraw(amount);
+    if((SvAccount->get_balance()) >= amount){
+        SvAccount->withdraw(amount); 
+        CreditAcc->withdraw(amount);
+    }else{
+        cout << "Not enough funds\n";
+    }        
 }
 
 
       //transfers funds from checkings account to savings account
 void User:: transerCheckingToSavings(double amount){
-    CkAccount->withdraw(amount);
-    SvAccount->deposit(amount);
+    if((CkAccount->get_balance()) >= amount){
+        CkAccount->withdraw(amount);
+        SvAccount->deposit(amount);
+    }else{
+        cout << "Not enough funds\n";
+    }         
 }
 
 int User::getCreditLimit(){
@@ -49,18 +61,30 @@ int User::getCreditScore(){
 
       
 void User::transerCheckingToCreditCard(double amount){
-    CkAccount->withdraw(amount);
-    CreditAcc->withdraw(amount);
+    if((CkAccount->get_balance()) >= amount){
+        CkAccount->withdraw(amount);
+        CreditAcc->withdraw(amount);
+    }else{
+        cout << "Not enough funds\n";
+    }    
 }
 
 void User::creditToChecking(double amount){
-    CkAccount->deposit(amount* 0.98);
-    CreditAcc->deposit(amount);
+    if((CreditAcc->get_balance()) >= amount){
+        CkAccount->deposit(amount* 0.98);
+        CreditAcc->deposit(amount);
+    }else{
+        cout << "Not enough funds\n";
+    } 
 }
 
 void User::creditToSaving(double amount){
-    SvAccount->deposit(amount * 0.98);
-    CreditAcc->deposit(amount);
+    if((CreditAcc->get_balance()) >= amount){
+        SvAccount->deposit(amount * 0.98);
+        CreditAcc->deposit(amount);
+    }else{
+        cout << "Not enough funds\n";
+    } 
 }
 
 
