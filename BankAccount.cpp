@@ -13,7 +13,7 @@ void BankAccount::deposit(double amount){
 
 //takes away an amount from bank balnce 
 void BankAccount::withdraw(double amount){
-    if(amount > balance){
+    if(amount > balance || amount < 0){
         std::cout << "Not enough Funds\n"; 
     }
     else{
