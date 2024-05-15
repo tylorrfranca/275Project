@@ -8,7 +8,11 @@ BankAccount::BankAccount(){
 
 // adds an amount to bank balance
 void BankAccount::deposit(double amount){
-    balance += amount; 
+    if(amount < 0){
+     std::cout << "Please enter a real amount a money(i.e. no negatives)\n";
+    }else{
+        balance += amount; 
+    }
 }
 
 //takes away an amount from bank balnce 
