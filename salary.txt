@@ -1,6 +1,6 @@
-userName  Password    LastName    FirstName     Checking Account    Savings Account    CreditCard
-tylor    hola          Keroles      John        100                  300                200
-Anthony    hola2        Nguyen       David       200                  200                100
-Nick       yoyo         Johnson      John        300                  200                100
+userName  Password    LastName    FirstName     Checking Account    Savings Account    CreditCard     Credit Limit      Credit Score
+tylor    hola          Keroles      John        100                  300                 200           1000                705
+Anthony    hola2        Nguyen       David       200                  200                100            800                680
+Nick       yoyo         Johnson      John        300                  200                100            700                750
 
 

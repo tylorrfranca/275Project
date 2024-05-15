@@ -20,7 +20,7 @@ class CreditCard : public BankAccount
 
   private:
     int score;
-    int creditLimit; 
+    int credit; 
     double balance;
     //payment date?
     //transaction history?

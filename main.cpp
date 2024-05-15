@@ -93,6 +93,7 @@ void CreditMenu(User &user){
             
         case 'd' : 
             cout << "705" << endl; //need random data here
+            CreditMenu(user);
             break; 
 
         case 'e' : 
