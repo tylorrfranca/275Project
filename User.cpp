@@ -21,33 +21,48 @@ User::User(std::string UserN, std::string UserP, std::string n, CheckingAccount*
 }
 
 void User::transerSavingsToCheckings(double amount){
-    if((SvAccount->get_balance()) >= amount){
-        SvAccount->withdraw(amount); 
-        CkAccount->deposit(amount);
-    }else{
-        cout << "Not enough funds\n";
+    if(amount < 0){
+        cout << "Please enter a real amount a money(i.e. no negatives)\n";
+    }
+    else{
+        if((SvAccount->get_balance()) >= amount){
+            SvAccount->withdraw(amount); 
+            CkAccount->deposit(amount);
+        }else{
+            cout << "Not enough funds\n";
+        }
     }
 }
 
       //transfers funds from savings account to credit card account
 void User::transerSavingsToCreditCard(double amount){
-    if((SvAccount->get_balance()) >= amount){
-        SvAccount->withdraw(amount); 
-        CreditAcc->withdraw(amount);
-    }else{
-        cout << "Not enough funds\n";
-    }        
+    if(amount < 0){
+        cout << "Please enter a real amount a money(i.e. no negatives)\n";
+    }
+    else{
+        if((SvAccount->get_balance()) >= amount){
+            SvAccount->withdraw(amount); 
+            CreditAcc->withdraw(amount);
+        }else{
+            cout << "Not enough funds\n";
+        } 
+    }       
 }
 
 
       //transfers funds from checkings account to savings account
 void User:: transerCheckingToSavings(double amount){
-    if((CkAccount->get_balance()) >= amount){
-        CkAccount->withdraw(amount);
-        SvAccount->deposit(amount);
-    }else{
-        cout << "Not enough funds\n";
-    }         
+    if(amount < 0){
+        cout << "Please enter a real amount a money(i.e. no negatives)\n";
+    }
+    else{
+        if((CkAccount->get_balance()) >= amount){
+            CkAccount->withdraw(amount);
+            SvAccount->deposit(amount);
+        }else{
+            cout << "Not enough funds\n";
+        }  
+    }       
 }
 
 int User::getCreditLimit(){
@@ -61,30 +76,45 @@ int User::getCreditScore(){
 
       
 void User::transerCheckingToCreditCard(double amount){
-    if((CkAccount->get_balance()) >= amount){
-        CkAccount->withdraw(amount);
-        CreditAcc->withdraw(amount);
-    }else{
-        cout << "Not enough funds\n";
-    }    
+    if(amount < 0){
+        cout << "Please enter a real amount a money(i.e. no negatives)\n";
+    }
+    else{
+        if((CkAccount->get_balance()) >= amount){
+            CkAccount->withdraw(amount);
+            CreditAcc->withdraw(amount);
+        }else{
+            cout << "Not enough funds\n";
+        }  
+    }  
 }
 
 void User::creditToChecking(double amount){
-    if((CreditAcc->get_balance()) >= amount){
-        CkAccount->deposit(amount* 0.98);
-        CreditAcc->deposit(amount);
-    }else{
-        cout << "Not enough funds\n";
-    } 
+    if(amount < 0){
+        cout << "Please enter a real amount a money(i.e. no negatives)\n";
+    }
+    else{
+        if((CreditAcc->get_balance()) >= amount){
+            CkAccount->deposit(amount* 0.98);
+            CreditAcc->deposit(amount);
+        }else{
+            cout << "Not enough funds\n";
+        } 
+    }
 }
 
 void User::creditToSaving(double amount){
-    if((CreditAcc->get_balance()) >= amount){
-        SvAccount->deposit(amount * 0.98);
-        CreditAcc->deposit(amount);
-    }else{
-        cout << "Not enough funds\n";
-    } 
+    if(amount < 0){
+        cout << "Please enter a real amount a money(i.e. no negatives)\n";
+    }
+    else{
+        if((CreditAcc->get_balance()) >= amount){
+            SvAccount->deposit(amount * 0.98);
+            CreditAcc->deposit(amount);
+        }else{
+            cout << "Not enough funds\n";
+        } 
+    }
 }
 
 
