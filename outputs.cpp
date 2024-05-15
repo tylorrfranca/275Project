@@ -4,6 +4,13 @@
 #include <time.h>
 
 void generateStatement(int items, bool savings){
+/*
+items: number of items to be generated below header
+
+savings = 1: generate Checking Account statement
+Savings = 0: generate credit card statement
+*/
+    
 
     std:ofstream out;
 
