@@ -12,7 +12,7 @@ Version: 1.0.0
 
 
 CheckingAccount::CheckingAccount(){
-    balance = 1000; 
+    
 }
     
 

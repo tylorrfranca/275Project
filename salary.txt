@@ -1,7 +1,6 @@
-userName  Password    LastName    FirstName      Salary
-100001    hola         Keroles      John        6022.01
-100004    hola2        Nguyen       David        29563.07
-100008    yoyo         Johnson      John         13762.67
-100002    cat          Amberg      Anthony        61704.15
-100024    dog          Nguyen      Lucas            17646.83
+userName  Password    LastName    FirstName     Checking Account    Savings Account    CreditCard
+tylor    hola          Keroles      John        100                  300                200
+Anthony    hola2        Nguyen       David       200                  200                100
+Nick       yoyo         Johnson      John        300                  200                100
+
 

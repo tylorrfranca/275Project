@@ -6,6 +6,10 @@
 #include <fstream>
 using namespace std; 
 
+User::User(){
+
+};
+
 User::User(std::string UserN, std::string UserP, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc)
  {
     this->UserName = UserN;
@@ -41,6 +45,17 @@ void User::transerCheckingToCreditCard(double amount){
     CreditAcc->deposit(amount);
 }
 
+void User::creditToChecking(double amount){
+    CkAccount->deposit(amount* 0.98);
+    CreditAcc->deposit(amount);
+}
+
+void User::creditToSaving(double amount){
+    SvAccount->deposit(amount * 0.98);
+    CreditAcc->deposit(amount);
+}
+
+
 std::string User::get_UserName() const{
     return UserName;
 }
@@ -48,6 +63,36 @@ std::string User::get_UserName() const{
 std::string User::get_password() const{
     return passWord;
 }
+
+double User::getCheckingBalance(){
+    return CkAccount->get_balance(); 
+ }
+
+double User::getSavingBalance(){
+    return SvAccount->get_balance(); 
+ }
+
+double User::getCreditBalance(){
+    return CreditAcc->get_balance(); 
+ }
+
+void User::Ckdeposit(double amount){
+    CkAccount->deposit(amount);
+ }
+
+ void User::Ckwithdraw(double amount){
+    CkAccount->withdraw(amount);
+ }
+
+ void User::Svdeposit(double amount){
+    SvAccount->deposit(amount);
+ }
+
+ void User::Svwithdraw(double amount){
+    SvAccount->withdraw(amount);
+ }
+
+
 
 void User::print(std::ostream &outputFile) const {
     int space = name.find(' ');

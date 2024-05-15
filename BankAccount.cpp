@@ -3,7 +3,7 @@
 
 //creates a balance of $2000
 BankAccount::BankAccount(){
-    balance = 1000; 
+    balance = 0; 
 }
 
 // adds an amount to bank balance
@@ -16,7 +16,9 @@ void BankAccount::withdraw(double amount){
     if(amount > balance){
         std::cout << "Not enough Funds\n"; 
     }
-    balance -= amount; 
+    else{
+        balance -= amount; 
+    }
 }
 
 //returns balance amount

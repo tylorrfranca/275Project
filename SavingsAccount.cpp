@@ -15,19 +15,8 @@ Version: 1.0.0
    */
 
   // balance not being initialized correctly, needs fix
-SavingsAccount::SavingsAccount() : balance(1000){
-    balance = 200;
+SavingsAccount::SavingsAccount(){
+
 }
 
-void SavingsAccount::withdraw(double amount){
-    if(amount > balance){
-        std::cout << "Not enough Funds\n"; 
-    }
-    else{
-        balance -= amount;
-        if(balance < 300){
-        std::cout << "Saving Account dropping below $300 \n"; 
-        } 
-    }
-}
 

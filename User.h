@@ -16,6 +16,7 @@ Version: 1.0.0
 
 class User {
     public:
+          User();
           User(std::string UserN, std::string UserP, std::string n, CheckingAccount* CkAcc, SavingsAccount* SvAcc, CreditCard* cc);
 
 
@@ -40,6 +41,24 @@ class User {
 
       //transfers funds from checkings account to credit card account
           void transerCheckingToCreditCard(double amount);
+
+          void creditToChecking(double amount);
+
+          void creditToSaving(double amount);
+
+          double getCheckingBalance();
+
+          double getSavingBalance();
+
+          double getCreditBalance();
+
+          void Ckdeposit(double amount);
+
+          void Ckwithdraw(double amount);
+
+          void Svdeposit(double amount);
+
+          void Svwithdraw(double amount);
 
           std::string get_UserName() const;
 
