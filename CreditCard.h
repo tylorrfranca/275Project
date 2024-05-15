@@ -16,8 +16,8 @@ class CreditCard : public BankAccount
     double getBalance();
     double getScore();
     double getAvailableCredit();
-    // void setLimit(); 
-    // void setScore();
+    void setLimit(int amount); 
+    void setScore(int amount);
 
 
   private:

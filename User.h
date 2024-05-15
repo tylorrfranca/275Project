@@ -42,6 +42,10 @@ class User {
       //transfers funds from checkings account to credit card account
           void transerCheckingToCreditCard(double amount);
 
+          int getCreditLimit();
+
+          int getCreditScore();
+
           void creditToChecking(double amount);
 
           void creditToSaving(double amount);

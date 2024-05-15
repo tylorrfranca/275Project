@@ -4,12 +4,14 @@
 #include "User.h"
 
 #include <vector>
+#include "generateData.cpp"
 
 
 using namespace std; 
 
 int main(); 
 void MainMenu(User &user);
+void CreditMenu(User &user);
 
 void goToLine(int n, std::ifstream& input){
     input.seekg(0);
@@ -21,9 +23,11 @@ void goToLine(int n, std::ifstream& input){
 
 vector<User> ReadandStoreData(){
     ifstream inputFile("Salary.txt");
+    ifstream inputFile2("credit.txt");
     vector<User> listOfUsers; 
     string username, password, fName, lName; 
-    double ckBalance, svBalance, ccBalance; 
+    double ckBalance, svBalance, ccBalance;
+    int ccScore, ccLimit; 
 
    
     CheckingAccount *checking; 
@@ -32,8 +36,10 @@ vector<User> ReadandStoreData(){
 
 
     goToLine(1,inputFile);
-    while ((!inputFile.eof())) {
-        inputFile >> username >> password>> lName >> fName >> ckBalance >> svBalance >> ccBalance; 
+    goToLine(1,inputFile2);
+    while ((!inputFile.eof()) || (!inputFile2.eof())) {
+        inputFile >> username >> password>> lName >> fName >> ckBalance >> svBalance; 
+        inputFile2 >> ccBalance >> ccLimit >> ccScore; 
         checking = new CheckingAccount;
         saving = new SavingsAccount; 
         credit = new CreditCard; 
@@ -42,21 +48,72 @@ vector<User> ReadandStoreData(){
         checking->deposit(ckBalance); 
         saving->deposit(svBalance);
         credit->deposit(ccBalance);
+        credit->setScore(ccScore);
+        credit->setLimit(ccLimit);
+
 
         User user(username, password, fullName, checking, saving, credit); 
 
         listOfUsers.push_back(user); 
     }
     inputFile.close();
+    inputFile2.close();
 
     return listOfUsers;
+}
+
+void PayOffCardMenu(User &user){
+    char choice;
+    cout << "_____________________________________________________ \n";
+    cout << "|            Which Account Would You Like           |\n"; 
+    cout << "|                    To Pay From?                   |\n";
+    cout << "|                                                   |\n";
+    cout << "| Checkings Balance: $" << user.getCheckingBalance() << "    Savings Balance: $" << user.getSavingBalance() << "  |\n"; 
+    cout << "______________________________________________________\n";
+    cout << "Please select an option\n";
+    cout << "A) Checkings Account" << endl; 
+    cout << "B) Savings Account" << endl; 
+    cout << "X) Back to Credit Card Menu" << endl;
+    cin >> choice;
+
+
+choice = tolower(choice);
+
+    switch(choice){
+        case 'a' :
+            double CkAmount; 
+            cout << "How much would you like to pay to your Credit Card Account?" << endl; 
+            cout << "$";
+            cin >> CkAmount;
+            user.transerCheckingToCreditCard(CkAmount); 
+            cout << "Payment Initialized...\n";
+            cout << "Payment Complete...\n";
+            CreditMenu(user);
+            break; 
+        
+        case 'b' :
+            double SvAmount; 
+            cout << "How much would you like to pay to your Credit Card Account?" << endl; 
+            cout << "$";
+            cin >> SvAmount;
+            user.transerSavingsToCreditCard(SvAmount); 
+            cout << "Payment Initialized...\n";
+            cout << "Payment Complete...\n";
+            CreditMenu(user);
+            break;
+
+        case 'x' :
+            CreditMenu(user);
+            break; 
+    }
 }
 
 void CreditMenu(User &user){
     char choice;
     cout << "____________________________________________ \n";
-    cout << "|          Credit Card Account Menu         |\n"; 
+    cout << "|          Credit Card Account Menu        |\n"; 
     cout << "|              Balance: $" << user.getCreditBalance() << "               |\n"; 
+    cout << "|               Limit: $" << user.getCreditLimit() << "               |\n";
     cout << "____________________________________________\n";
     cout << "Please select an option\n";
     cout << "A) Pay off Card" << endl; 
@@ -71,7 +128,7 @@ void CreditMenu(User &user){
 
     switch(choice){
         case 'a' :
-           CreditMenu(user);
+           PayOffCardMenu(user);
            break; 
         
         case 'b' :
@@ -93,7 +150,10 @@ void CreditMenu(User &user){
            break; 
             
         case 'd' : 
-            cout << "705" << endl; //need random data here
+            cout << "____________________________________________ \n";
+            cout << "|          FICO CREDIT SCORE               |\n"; 
+            cout << "|              Score: " << user.getCreditScore() << "                  |\n";
+            cout << "____________________________________________\n";
             CreditMenu(user);
             break; 
 
@@ -111,13 +171,12 @@ void SavingMenu(User &user){
     char choice;
     cout << "____________________________________________ \n";
     cout << "|           Savings Account Menu           |\n"; 
-    cout << "|              Balance: $" << user.getSavingBalance() << "               |\n"; 
+    cout << "|              Balance: $" << user.getSavingBalance() << "              |\n"; 
     cout << "____________________________________________\n";
     cout << "Please select an option\n";
     cout << "A) Deposit" << endl; 
     cout << "B) Withdrawl" << endl; 
     cout << "C) Transfer To Checking" << endl;
-    cout << "D) View Last Statement" << endl;
     cout << "X) Main Menu" << endl;
     cin >> choice;
 
@@ -150,10 +209,6 @@ void SavingMenu(User &user){
            user.transerSavingsToCheckings(transferAmount);
            SavingMenu(user);
            break; 
-            
-        case 'd' : 
-            //need Someone to add a random file that generates this data 
-            break; 
 
         case 'x' :
             MainMenu(user);
@@ -166,7 +221,7 @@ void CheckingMenu(User &user){
     char choice;
     cout << "____________________________________________ \n";
     cout << "|           Checking Account Menu          |\n"; 
-    cout << "|              Balance: $" << user.getCheckingBalance() << "               |\n"; 
+    cout << "|              Balance: $" << user.getCheckingBalance() << "              |\n"; 
     cout << "____________________________________________\n";
     cout << "Please select an option\n";
     cout << "A) Deposit" << endl; 
@@ -307,7 +362,17 @@ bool LogInPage(vector<User>& users){
 }
 
 int main(){
+    srand(static_cast<unsigned>(time(0))); // Seed for random number generator
 
+    std::string fileName = "salary.txt";
+    int numberOfUsers = 10; // Number of User to generate
+
+    std::string fileName2 = "credit.txt";
+    int numberOfEntries = 10; // Number of credit entries to generate
+
+    generateCreditFile(fileName2, numberOfEntries);
+
+    generateSalaryFile(fileName, numberOfUsers);
     vector<User> UserDataBase = ReadandStoreData();
     LogInPage(UserDataBase);     
     return 0; 

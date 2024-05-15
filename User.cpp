@@ -28,7 +28,7 @@ void User::transerSavingsToCheckings(double amount){
       //transfers funds from savings account to credit card account
 void User::transerSavingsToCreditCard(double amount){
     SvAccount->withdraw(amount); 
-    CreditAcc->deposit(amount);
+    CreditAcc->withdraw(amount);
 }
 
 
@@ -38,11 +38,19 @@ void User:: transerCheckingToSavings(double amount){
     SvAccount->deposit(amount);
 }
 
+int User::getCreditLimit(){
+    return CreditAcc->getAvailableCredit();
+}
+
+int User::getCreditScore(){
+    return CreditAcc->getScore();
+}
+
 
       
 void User::transerCheckingToCreditCard(double amount){
     CkAccount->withdraw(amount);
-    CreditAcc->deposit(amount);
+    CreditAcc->withdraw(amount);
 }
 
 void User::creditToChecking(double amount){

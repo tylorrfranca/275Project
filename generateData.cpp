@@ -1,60 +1,114 @@
 #include <iostream>
+#include <string>
 #include <fstream>
+#include <vector>
 #include <ctime>
 #include <cstdlib>
-#include <iomanip>
 
-using namespace std;
+struct Credit {
+    int creditBalance;
+    int creditLimit;
+    int creditScore;
+};
 
-int generateRandomNumber(int min, int max) {
-  return rand() % (max - min + 1) + min;
+// Function prototypes
+int generateRandomCreditBalance();
+int generateRandomCreditLimit();
+int generateRandomCreditScore();
+Credit generateRandomCredit();
+void generateCreditFile(const std::string &fileName, int numberOfEntries);
+
+int generateRandomCreditBalance() {
+    return rand() % 1001; // Random balance between 0 and 1000
 }
 
-double generateRandomSalary(double minSalary, double maxSalary) {
-  return minSalary + static_cast<double>(rand()) / (RAND_MAX) * (maxSalary - minSalary);
+int generateRandomCreditLimit() {
+    return (rand() % 4501) + 500; // Random limit between 500 and 5000
 }
 
-string generateRandomLastName() {
-  // Replace with an array of last names if you want a specific list
-  string lastNames[] = {"Smith", "Johnson", "Williams", "Brown", "Jones", "Franca", "Keroles", "Mitubishi", "Amberg", "Nguyen"};
-  int randomIndex = generateRandomNumber(0, sizeof(lastNames) / sizeof(lastNames[0]) - 1);
-  return lastNames[randomIndex];
+int generateRandomCreditScore() {
+    return (rand() % 326) + 500; // Random score between 300 and 750
 }
 
-string generateRandomFirstName() {
-  // Replace with an array of first names if you want a specific list
-  string firstNames[] = {"John", "Jane", "David", "Mary", "Elizabeth", "Lucas", "Tylor", "Anthony", "Stephen", "Adrian", "James"};
-  int randomIndex = generateRandomNumber(0, sizeof(firstNames) / sizeof(firstNames[0]) - 1);
-  return firstNames[randomIndex];
+Credit generateRandomCredit() {
+    Credit credit;
+    credit.creditBalance = generateRandomCreditBalance();
+    credit.creditLimit = generateRandomCreditLimit();
+    credit.creditScore = generateRandomCreditScore();
+    return credit;
 }
 
-void generateFile() {
-  srand(time(0));  // Seed the random number generator
-
-  int numEmployees = 100; // Adjust this value to change the number of employees
-
-  ofstream salaryFile("Salary.txt");
-  if (salaryFile.is_open()) {
-    salaryFile << "EmployeeID LastName FirstName Salary\n";
-    for (int i = 0; i < numEmployees; ++i) {
-      long long employeeId = generateRandomNumber(100000000, 999999999);
-      string lastName = generateRandomLastName();
-      string firstName = generateRandomFirstName();
-      double salary = generateRandomSalary(300.0, 70000.0);
-
-      // Find the maximum length among all first names for consistent alignment
-      int maxLength = 0;
-      for (int j = 0; j < numEmployees; ++j) {
-        maxLength = max(maxLength, int(generateRandomFirstName().length()));
-      }
-
-      salaryFile << employeeId << " " << lastName << " " << setw(maxLength) << right << firstName << " " << fixed << setprecision(2) << salary << endl;
-
-     // for(long i = 0; i < 10000; i++){}; //busy wait
+void generateCreditFile(const std::string &fileName, int numberOfEntries) {
+    std::ofstream outFile(fileName);
+    if (!outFile) {
+        std::cerr << "Failed to open file for writing." << std::endl;
+        return;
     }
-    salaryFile.close();
-  } else {
-    cout << "Error: Could not open file." << endl;
-  }
 
+    outFile << "Credit Balance\tCredit Limit\tCredit Score\n";
+
+    for (int i = 0; i < numberOfEntries; ++i) {
+        Credit credit = generateRandomCredit();
+        outFile << credit.creditBalance << "           \t"
+                << credit.creditLimit << "           \t"
+                << credit.creditScore << "\n";
+    }
+
+    outFile.close();
+    
 }
+
+
+struct Employee {
+    std::string userName;
+    std::string password;
+    std::string lastName;
+    std::string firstName;
+    int checkingAccount;
+    int savingsAccount;
+};
+
+std::vector<std::string> userNames = {"tylor", "Anthony", "Nick", "james", "sarah", "michael", "jessica", "john", "emily", "daniel"};
+std::vector<std::string> passwords = {"hola", "hola2", "yoyo", "pass123", "hello", "world", "abc123", "qwerty", "password", "letmein"};
+std::vector<std::string> lastNames = {"Keroles", "Nguyen", "Johnson", "Smith", "Brown", "Wilson", "Moore", "Taylor", "Anderson", "Thomas"};
+std::vector<std::string> firstNames = {"John", "David", "John", "Michael", "Sarah", "Jessica", "Emily", "Daniel", "Matthew", "Laura"};
+
+int generateRandomAmount() {
+    return rand() % 1000 + 1; // Random amount between 1 and 1000
+}
+
+Employee generateRandomEmployee() {
+    Employee emp;
+    emp.userName = userNames[rand() % userNames.size()];
+    emp.password = passwords[rand() % passwords.size()];
+    emp.lastName = lastNames[rand() % lastNames.size()];
+    emp.firstName = firstNames[rand() % firstNames.size()];
+    emp.checkingAccount = generateRandomAmount();
+    emp.savingsAccount = generateRandomAmount();
+    return emp;
+}
+
+void generateSalaryFile(const std::string &fileName, int numberOfEmployees) {
+    std::ofstream outFile(fileName);
+    if (!outFile) {
+        std::cerr << "Failed to open file for writing." << std::endl;
+        return;
+    }
+
+    outFile << "userName\tPassword\tLastName\tFirstName\tChecking Account\tSavings Account\n";
+
+    for (int i = 0; i < numberOfEmployees; ++i) {
+        Employee emp = generateRandomEmployee();
+        outFile << emp.userName << "    \t"
+                << emp.password << "    \t"
+                << emp.lastName << "   \t"
+                << emp.firstName << "    \t"
+                << emp.checkingAccount << "                   \t"
+                << emp.savingsAccount <<"\n";
+    }
+
+    outFile.close();
+  
+}
+
+

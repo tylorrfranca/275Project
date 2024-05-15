@@ -1,6 +1,11 @@
-userName  Password    LastName    FirstName     Checking Account    Savings Account    CreditCard     
-tylor    hola          Keroles      John        100                  300                 200           
-Anthony    hola2        Nguyen       David       200                  200                100            
-Nick       yoyo         Johnson      John        300                  200                100           
-
-
+userName	Password	LastName	FirstName	Checking Account	Savings Account
+emily    	hola    	Wilson   	John    	791                   	98
+Nick    	hello    	Brown   	Jessica    	825                   	694
+sarah    	qwerty    	Nguyen   	Jessica    	130                   	10
+john    	abc123    	Wilson   	Matthew    	940                   	393
+john    	yoyo    	Keroles   	Daniel    	54                   	225
+tylor    	hello    	Taylor   	John    	579                   	977
+daniel    	letmein    	Moore   	Jessica    	516                   	275
+jessica    	hello    	Thomas   	Michael    	335                   	84
+michael    	hola2    	Moore   	Matthew    	683                   	36
+james    	hola2    	Keroles   	Matthew    	346                   	227
