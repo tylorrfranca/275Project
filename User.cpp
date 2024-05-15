@@ -68,6 +68,10 @@ std::string User::get_UserName() const{
     return UserName;
 }
 
+std::string User::get_name() const{
+    return name;
+}
+
 std::string User::get_password() const{
     return passWord;
 }

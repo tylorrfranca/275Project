@@ -68,6 +68,8 @@ class User {
 
           std::string get_password() const;
 
+          std::string get_name() const; 
+
     private:
           std::string UserName;
           std::string passWord; 

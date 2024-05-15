@@ -1,9 +1,12 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <fstream>
 #include <time.h>
 
-void generateStatement(int items, bool savings){
+using namespace std;
+
+void generateStatement(int items, bool checkings){
 /*
 items: number of items to be generated below header
 
@@ -12,25 +15,25 @@ Savings = 0: generate credit card statement
 */
     
 
-    std:ofstream out;
+    std::ofstream out;
 
-    if (savings){
-        out.open("Checking Account Statement");
+    if (checkings){
+        out.open("CheckingAccountStatement.txt");
     }
     else{
-        out.open("Credit Card Statement");
+        out.open("CreditCardStatement.txt");
     };
     
 
     //formatting header:
     out << "Statement for ";
-    if (savings){
+    if (checkings){
         out << "Checking Account";
     }
     else{
         out << "Credit Card";
     };
-    out << " May 24: \n" << endl;
+    out << " May: \n" << endl;
     out << "Date" << setw(25) << "Category" << setw(35) << "Withdrawals"<< endl;
 
     //creating fake dates, categories, and withdrawals
@@ -44,7 +47,7 @@ Savings = 0: generate credit card statement
 
     //formatting dates, categories & withdrawals for out 
     string ctgry;
-    for (int y = 0; y < items; y++) {   //checking category to turn random 
+    for(int y = 0; y < items; y++) {   //checking category to turn random 
         if (category[y] == 0) {         //number in array into an actual value
             ctgry = "Grocery";
         }
@@ -80,5 +83,4 @@ Savings = 0: generate credit card statement
     }
 
     out.close();    //close the file
-
 }

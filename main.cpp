@@ -5,9 +5,13 @@
 
 #include <vector>
 #include "generateData.cpp"
+#include "outputs.cpp"
 
 
-using namespace std; 
+using namespace std;
+bool ranOnce = false; 
+bool CheckingOutRanOnce = false; 
+bool CreditOutRanOnce = false;  
 
 int main(); 
 void MainMenu(User &user);
@@ -70,6 +74,7 @@ void PayOffCardMenu(User &user){
     cout << "|                                                   |\n";
     cout << "| Checkings Balance: $" << user.getCheckingBalance() << "    Savings Balance: $" << user.getSavingBalance() << "  |\n"; 
     cout << "______________________________________________________\n";
+    cout << "Hello, " << user.get_name() << endl;
     cout << "Please select an option\n";
     cout << "A) Checkings Account" << endl; 
     cout << "B) Savings Account" << endl; 
@@ -115,6 +120,7 @@ void CreditMenu(User &user){
     cout << "|              Balance: $" << user.getCreditBalance() << "               |\n"; 
     cout << "|               Limit: $" << user.getCreditLimit() << "               |\n";
     cout << "____________________________________________\n";
+    cout << "Hello, " << user.get_name() << endl;
     cout << "Please select an option\n";
     cout << "A) Pay off Card" << endl; 
     cout << "B) Transfer to Checking with 2% fee" << endl; 
@@ -158,7 +164,12 @@ void CreditMenu(User &user){
             break; 
 
         case 'e' : 
-            //need random data to be output here
+            if(!CreditOutRanOnce){
+                generateStatement(15, false);
+            }
+            CreditOutRanOnce = true;
+            cout << "Outputted to CreditCardStatement.txt\n"; 
+            CreditMenu(user);
             break; 
 
         case 'x' :
@@ -173,6 +184,7 @@ void SavingMenu(User &user){
     cout << "|           Savings Account Menu           |\n"; 
     cout << "|              Balance: $" << user.getSavingBalance() << "              |\n"; 
     cout << "____________________________________________\n";
+    cout << "Hello, " << user.get_name() << endl;
     cout << "Please select an option\n";
     cout << "A) Deposit" << endl; 
     cout << "B) Withdrawl" << endl; 
@@ -223,6 +235,7 @@ void CheckingMenu(User &user){
     cout << "|           Checking Account Menu          |\n"; 
     cout << "|              Balance: $" << user.getCheckingBalance() << "              |\n"; 
     cout << "____________________________________________\n";
+    cout << "Hello, " << user.get_name() << endl;
     cout << "Please select an option\n";
     cout << "A) Deposit" << endl; 
     cout << "B) Withdrawl" << endl; 
@@ -262,7 +275,12 @@ void CheckingMenu(User &user){
            break; 
             
         case 'd' : 
-            //need Someone to add a random file that generates this data 
+            if(!CheckingOutRanOnce){
+                generateStatement(15, true);
+            }
+            CheckingOutRanOnce = true;
+            cout << "Outputted to CheckingAccountStatement.txt\n"; 
+            CheckingMenu(user); 
             break; 
 
         case 'x' :
@@ -278,6 +296,7 @@ void MainMenu(User &user){
     cout << "____________________________________________ \n";
     cout << "|Welcome to the Franca Finance Application |\n"; 
     cout << "____________________________________________\n";
+    cout << "Hello, " << user.get_name() << endl; 
     cout << "Please select an option\n";
     cout << endl; 
 
@@ -362,17 +381,16 @@ bool LogInPage(vector<User>& users){
 }
 
 int main(){
-    srand(static_cast<unsigned>(time(0))); // Seed for random number generator
-
-    std::string fileName = "salary.txt";
-    int numberOfUsers = 10; // Number of User to generate
-
-    std::string fileName2 = "credit.txt";
-    int numberOfEntries = 10; // Number of credit entries to generate
-
-    generateCreditFile(fileName2, numberOfEntries);
-
-    generateSalaryFile(fileName, numberOfUsers);
+    if(!ranOnce){
+        srand(static_cast<unsigned>(time(0))); // Seed for random number generator
+        std::string fileName = "salary.txt";
+        int numberOfUsers = 10; // Number of User to generate
+        std::string fileName2 = "credit.txt";
+        int numberOfEntries = 10; // Number of credit entries to generate
+        generateCreditFile(fileName2, numberOfEntries);
+        generateSalaryFile(fileName, numberOfUsers);
+    }
+    ranOnce = true; 
     vector<User> UserDataBase = ReadandStoreData();
     LogInPage(UserDataBase);     
     return 0; 
