@@ -24,6 +24,7 @@ vector<User> ReadandStoreData(){
     vector<User> listOfUsers; 
     string username, password, fName, lName; 
     double ckBalance, svBalance, ccBalance; 
+
    
     CheckingAccount *checking; 
     SavingsAccount *saving; 

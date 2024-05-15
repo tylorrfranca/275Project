@@ -21,4 +21,14 @@ double CreditCard::getAvailableCredit(){
     return credit; 
 }
 
+// void CreditCard::setLimit(double amount){
+//     credit = amount; 
+// } 
+
+
+// void CreditCard::setScore(double amount){
+//     score = amount; 
+// }
+
+
 

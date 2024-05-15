@@ -16,16 +16,14 @@ class CreditCard : public BankAccount
     double getBalance();
     double getScore();
     double getAvailableCredit();
+    // void setLimit(); 
+    // void setScore();
 
 
   private:
     int score;
-    int credit; 
+    double credit; 
     double balance;
-    //payment date?
-    //transaction history?
-    //struct Transaction?
-    // Transaction Transactions[]
 };
 
 #endif
