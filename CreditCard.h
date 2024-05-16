@@ -12,7 +12,7 @@ class CreditCard : public BankAccount
 {
   public:
   CreditCard();
-
+//public function specified in .cpp file
     double getBalance();
     double getScore();
     double getAvailableCredit();
@@ -21,6 +21,7 @@ class CreditCard : public BankAccount
 
 
   private:
+  //credit card class members
     int score;
     double credit; 
     double balance;

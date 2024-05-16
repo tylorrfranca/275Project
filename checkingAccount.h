@@ -15,7 +15,7 @@ Version: 1.0.0
 class CheckingAccount : public BankAccount {
 public:
    /**
-      Constructs a Savings account with a $0 balance.
+      Constructs a checking account with a $0 balance.
    */
    CheckingAccount();
    
