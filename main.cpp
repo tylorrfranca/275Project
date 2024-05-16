@@ -17,6 +17,7 @@ int main();
 void MainMenu(User &user);
 void CreditMenu(User &user);
 
+//function to go any line on file
 void goToLine(int n, std::ifstream& input){
     input.seekg(0);
     std::string line; 
@@ -25,6 +26,7 @@ void goToLine(int n, std::ifstream& input){
     }
 }
 
+//function that reads in data and creates a vector of users with all their members
 vector<User> ReadandStoreData(){
     ifstream inputFile("Salary.txt");
     ifstream inputFile2("credit.txt");
@@ -55,7 +57,7 @@ vector<User> ReadandStoreData(){
         credit->setScore(ccScore);
         credit->setLimit(ccLimit);
 
-
+        //each line a new user is populated into vector listOfusers
         User user(username, password, fullName, checking, saving, credit); 
 
         listOfUsers.push_back(user); 
@@ -66,6 +68,7 @@ vector<User> ReadandStoreData(){
     return listOfUsers;
 }
 
+//function that displays payment options to pay off credit card 
 void PayOffCardMenu(User &user){
     char choice;
     cout << "_____________________________________________________ \n";
@@ -84,6 +87,9 @@ void PayOffCardMenu(User &user){
 
 choice = tolower(choice);
 
+    //three choices checking, saving or exit
+    //when a choice is selected and a value in inputed the transfer function is called
+    //if exit is not selected then the function is recalled and displays menu again
     switch(choice){
         case 'a' :
             double CkAmount; 
@@ -113,6 +119,8 @@ choice = tolower(choice);
     }
 }
 
+//funciton that displays credit card menu 
+//each option wil either call a function from user.h or print a file 
 void CreditMenu(User &user){
     char choice;
     cout << "____________________________________________ \n";
@@ -132,6 +140,7 @@ void CreditMenu(User &user){
 
     choice = tolower(choice);
 
+    //if exit is not selected then the function is recalled and displays menu again
     switch(choice){
         case 'a' :
            PayOffCardMenu(user);
@@ -178,6 +187,8 @@ void CreditMenu(User &user){
     }
 }
 
+//dipalays saving account menu with various options 
+//each option wil either call a function from user.h or exit
 void SavingMenu(User &user){
     char choice;
     cout << "____________________________________________ \n";
@@ -194,6 +205,7 @@ void SavingMenu(User &user){
 
     choice = tolower(choice);
 
+//if exit is not selected then the function is recalled and displays menu again
     switch(choice){
         case 'a' :
            double depositAmount; 
@@ -228,7 +240,8 @@ void SavingMenu(User &user){
     }
 }
 
-
+//dipalays checking account menu with various options 
+//each option wil either call a function from user.h or print a file 
 void CheckingMenu(User &user){
     char choice;
     cout << "____________________________________________ \n";
@@ -246,6 +259,7 @@ void CheckingMenu(User &user){
 
     choice = tolower(choice);
 
+//if exit is not selected then the function is recalled and displays menu again
     switch(choice){
         case 'a' :
            double depositAmount; 
@@ -289,7 +303,8 @@ void CheckingMenu(User &user){
     }
 }
 
-
+//dipalays Main menu with various options 
+//user can log out from this menu and re login with the same or different credentials
 void MainMenu(User &user){
 
     char choice;
@@ -308,6 +323,7 @@ void MainMenu(User &user){
 
     choice = tolower(choice);
 
+    //calls funtion to different menu based on users choice
     switch(choice){
         case 'a' :
            CheckingMenu(user);
@@ -329,6 +345,8 @@ void MainMenu(User &user){
         
 }
 
+//first page user sees 
+//user is asked for username and password
 bool LogInPage(vector<User>& users){
     bool access = false;
     User passUser;  
@@ -347,11 +365,12 @@ bool LogInPage(vector<User>& users){
         cin >> password;
 
 
-
+        //compares users input to list of usernames and passwords
+        
         for (const auto& user : users){
             userCompare = user.get_UserName();
             passCompare = user.get_password(); 
-
+            //is both are a match access is granted
             if(userCompare == userName && passCompare == password){
                 access = true; 
                 passUser = user; 
@@ -381,6 +400,7 @@ bool LogInPage(vector<User>& users){
 }
 
 int main(){
+    //main function creates a random file for users and there credit information 
     if(!ranOnce){
         srand(static_cast<unsigned>(time(0))); // Seed for random number generator
         std::string fileName = "salary.txt";
@@ -390,6 +410,7 @@ int main(){
         generateCreditFile(fileName2, numberOfEntries);
         generateSalaryFile(fileName, numberOfUsers);
     }
+    //once random data is generated the user is prompted with the login screen
     ranOnce = true; 
     vector<User> UserDataBase = ReadandStoreData();
     LogInPage(UserDataBase);     

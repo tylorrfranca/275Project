@@ -1,18 +1,18 @@
 Statement for Credit Card May: 
 
 Date                 Category                        Withdrawals
-5-19-2024           Insurance                             $128.55
-5-6-2024              Travel                             $38.72
-5-31-2024           Insurance                             $77.71
-5-31-2024           Insurance                             $28.15
-5-12-2024           Utilities                             $23.07
-5-30-2024             Grocery                             $57.06
-5-25-2024              Travel                             $119.76
-5-21-2024           Utilities                             $80.63
-5-28-2024           Utilities                             $105.34
-5-6-2024             Grocery                             $125.74
-5-28-2024              Travel                             $110.41
-5-27-2024           Insurance                             $74.21
-5-26-2024             Grocery                             $7.03
-5-30-2024           Utilities                             $123.83
-5-24-2024           Utilities                             $140.42
+5-3-2024             Grocery                             $5.00
+5-17-2024              Travel                             $137.07
+5-23-2024             Grocery                             $51.72
+5-7-2024              Travel                             $13.48
+5-18-2024             Grocery                             $73.34
+5-25-2024           Insurance                             $5.28
+5-17-2024           Insurance                             $146.37
+5-20-2024              Travel                             $42.93
+5-16-2024             Grocery                             $93.16
+5-19-2024           Insurance                             $24.61
+5-3-2024             Grocery                             $96.21
+5-8-2024           Utilities                             $16.11
+5-30-2024           Utilities                             $83.85
+5-15-2024           Insurance                             $112.22
+5-21-2024           Insurance                             $22.17
